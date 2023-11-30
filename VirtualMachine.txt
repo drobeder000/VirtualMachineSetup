@@ -1,0 +1,21 @@
+#!/bin/bash
+
+#More space and uninstalls useless hacking programs (for now)
+sudo apt remove john wireshark zaproxy rainbowcrack -y
+sudo apt autoremove -y
+sudo apt update && sudo apt upgrade -y
+sudo apt autoremove -y
+clear
+
+#Run ./ programs on CyberStart (being able to 32-bit elf files)
+sudo dpkg --add-architecture i386
+sudo apt install libc6:i386 libstdc++6:i386 -y
+sudo apt autoremove -y
+clear
+
+#Setup for DVWA
+sudo sed -i 's/allow_url_include=Off/allow_url_include=On/g' /opt/lampp/etc/php.ini
+sudo sed -i 's/display_errors=Off/display_errors=On/g' /opt/lampp/etc/php.ini
+sudo chmod 777 /opt/lampp/htdocs/dvwa/hackable/uploads/
+sudo chmod 777 /opt/lampp/htdocs/dvwa/config
+echo 'Type DVWA_start'
